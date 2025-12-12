@@ -1,0 +1,103 @@
+.bodyloom-toggles-wrapper {
+    width: 100%;
+}
+
+.bodyloom-toggles-item {}
+
+
+.bodyloom-toggles-title {
+    padding: 15px 20px;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.bodyloom-toggles-title:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.bodyloom-toggles-item.active .bodyloom-toggles-title {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.bodyloom-toggles-title-text {
+    font-weight: inherit;
+}
+
+.bodyloom-toggles-icon {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* Default Style (Arrow) */
+.bodyloom-style-default .bodyloom-toggles-icon::before {
+    content: '\f0d7';
+    /* fa-caret-down */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.bodyloom-style-default .bodyloom-toggles-item.active .bodyloom-toggles-icon {
+    transform: rotate(180deg);
+}
+
+/* Plus/Minus Style */
+.bodyloom-style-plus-minus .bodyloom-toggles-icon::before {
+    content: '\f067';
+    /* fa-plus */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.bodyloom-style-plus-minus .bodyloom-toggles-item.active .bodyloom-toggles-icon::before {
+    content: '\f068';
+    /* fa-minus */
+}
+
+/* Chevron Style */
+.bodyloom-style-chevron .bodyloom-toggles-icon::before {
+    content: '\f078';
+    /* fa-chevron-down */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.bodyloom-style-chevron .bodyloom-toggles-item.active .bodyloom-toggles-icon {
+    transform: rotate(180deg);
+}
+
+/* Custom Icons (if provided via Elementor) */
+.bodyloom-toggles-icon .bodyloom-icon-opened {
+    display: none;
+}
+
+.bodyloom-toggles-item.active .bodyloom-toggles-icon .bodyloom-icon-closed {
+    display: none;
+}
+
+.bodyloom-toggles-item.active .bodyloom-toggles-icon .bodyloom-icon-opened {
+    display: inline-block;
+}
+
+.bodyloom-toggles-content {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: transparent;
+}
+
+.bodyloom-toggles-content-inner {
+    padding: 20px;
+}
+
+/* Hide border top if item is not active to prevent double border visual */
+.bodyloom-toggles-item:not(.active) .bodyloom-toggles-content {
+    border-top: none;
+}

@@ -1,0 +1,45 @@
+{
+	"apiVersion": 3,
+	"name": "bodyloom/dynamic-toggles",
+	"version": "1.0.0",
+	"title": "Dynamic Toggles",
+	"category": "widgets",
+	"icon": "excerpt-view",
+	"description": "Create toggles from repeater fields.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "bodyloom-dynamic-toggles",
+	"editorScript": "file:./block.js",
+	"render": "file:./render.php",
+	"attributes": {
+		"repeater_field": {
+			"type": "string",
+			"default": ""
+		},
+		"title_field": {
+			"type": "string",
+			"default": ""
+		},
+		"content_field": {
+			"type": "string",
+			"default": ""
+		},
+		"type": {
+			"type": "string",
+			"default": "toggles"
+		},
+		"style": {
+			"type": "string",
+			"default": "default"
+		},
+		"open_first": {
+			"type": "boolean",
+			"default": false
+		},
+		"faq_schema": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

@@ -1,0 +1,38 @@
+Installation Instructions
+
+1. Upload the `bodyloom-dynamic-toggles` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Ensure you have one of the supported custom field plugins installed and active:
+   - Advanced Custom Fields (ACF) Pro
+   - Meta Box
+   - Pods
+
+Usage
+
+Elementor:
+1. Open a page in Elementor.
+2. Drag the "Bodyloom Toggles" widget to the page.
+3. Select "ACF Repeater" as the Data Source.
+4. Enter the Repeater Field Name, Title Sub-Field, and Content Sub-Field.
+5. Configure styles and options (Type, Style, Default Toggle, etc.).
+
+Gutenberg (Block):
+1. In the block editor, search for "Dynamic Toggles".
+2. Add the block to your page.
+3. In the block settings sidebar, enter the Repeater Field Name, Title Sub-Field, and Content Sub-Field.
+4. Configure Type, Style, and other options.
+
+Shortcode:
+Use the `[bodyloom_toggles]` shortcode in any content area (Classic Editor, Divi, etc.).
+
+Parameters:
+- `repeater`: The name of the repeater field.
+- `title_field`: The sub-field name for the title.
+- `content_field`: The sub-field name for the content.
+- `type`: 'toggles' (default) or 'accordion'.
+- `style`: 'default' (arrow), 'plus-minus', or 'chevron'.
+- `open_first`: 'yes' to open the first item by default.
+- `faq_schema`: 'yes' to enable FAQ Schema.
+
+Example:
+[bodyloom_toggles repeater="my_repeater" title_field="question" content_field="answer" type="accordion" style="chevron" open_first="yes"]
