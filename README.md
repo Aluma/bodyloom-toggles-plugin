@@ -38,3 +38,20 @@ Search for the "Dynamic Toggles" block and add it to your post or page.
 
 ### 1.0.0
 *   Initial release.
+
+## Screenshots
+
+![Elementor Elements Panel](assets/screenshots/Elementor%20Elements%20Panel%20-%20Bodyloom%20Icon%20List%20and%20Toggles%20Plugins.png)
+*Elementor Elements Panel*
+
+![Content Panel](assets/screenshots/Edit%20Bodyloom%20Toggles%20Content%20Panel.png)
+*Content Panel*
+
+![Style Panel](assets/screenshots/Edit%20Bodyloom%20Toggles%20Style%20Panel.png)
+*Style Panel*
+
+![Advanced Panel](assets/screenshots/Edit%20Bodyloom%20Toggles%20Advanced%20Panel.png)
+*Advanced Panel*
+
+![Rendered Frontend Example](assets/screenshots/Bodyloom%20Dynanic%20Toggles%20-%20Accordion%20Rendered.jpg)
+*Rendered Frontend Example*

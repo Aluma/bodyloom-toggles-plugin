@@ -40,3 +40,11 @@ Use the "Dynamic Toggles" block.
 
 = 1.0.0 =
 *   Initial release.
+
+== Screenshots ==
+
+1. Elementor Elements Panel (assets/screenshots/Elementor Elements Panel - Bodyloom Icon List and Toggles Plugins.png)
+2. Content Panel (assets/screenshots/Edit Bodyloom Toggles Content Panel.png)
+3. Style Panel (assets/screenshots/Edit Bodyloom Toggles Style Panel.png)
+4. Advanced Panel (assets/screenshots/Edit Bodyloom Toggles Advanced Panel.png)
+5. Rendered Frontend Example (assets/screenshots/Bodyloom Dynanic Toggles - Accordion Rendered.jpg)
