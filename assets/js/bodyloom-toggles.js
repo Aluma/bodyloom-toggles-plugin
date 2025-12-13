@@ -2,7 +2,19 @@ jQuery(document).ready(function($) {
     var BodyloomToggles = {
         init: function() {
             this.bindEvents();
+            this.enforceState();
             this.checkHash();
+        },
+
+        enforceState: function() {
+            $('.bodyloom-toggles-item').each(function() {
+                var $this = $(this);
+                if ($this.hasClass('active')) {
+                    $this.find('.bodyloom-toggles-content').show();
+                } else {
+                    $this.find('.bodyloom-toggles-content').hide();
+                }
+            });
         },
 
         bindEvents: function() {

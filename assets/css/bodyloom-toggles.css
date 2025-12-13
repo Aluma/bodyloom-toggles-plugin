@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-.bodyloom-toggles-item {}
+
 
 
 .bodyloom-toggles-title {
@@ -91,6 +91,11 @@
 .bodyloom-toggles-content {
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     background-color: transparent;
+    display: none;
+}
+
+.bodyloom-toggles-item.active .bodyloom-toggles-content {
+    display: block;
 }
 
 .bodyloom-toggles-content-inner {
