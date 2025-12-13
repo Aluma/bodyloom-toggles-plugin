@@ -368,6 +368,46 @@ class Toggles extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'title_bd_color',
+            [
+                'label' => esc_html__('Border Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['title_border_border!' => ''],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'title_box_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__title',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'title_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__title-text',
+            ]
+        );
+
         $this->end_controls_tab();
 
         // Hover
@@ -399,6 +439,46 @@ class Toggles extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'title_bd_color_hover',
+            [
+                'label' => esc_html__('Border Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['title_border_border!' => ''],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_border_radius_hover',
+            [
+                'label' => esc_html__('Border Radius', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'title_box_shadow_hover',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__title:hover',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'title_text_shadow_hover',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__title:hover .bodyloom-toggles__title-text',
+            ]
+        );
+
         $this->end_controls_tab();
 
         // Active
@@ -427,6 +507,46 @@ class Toggles extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .active-toggle .bodyloom-toggles__title' => 'background-color: {{VALUE}};',
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'title_bd_color_active',
+            [
+                'label' => esc_html__('Border Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__title' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['title_border_border!' => ''],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'title_border_radius_active',
+            [
+                'label' => esc_html__('Border Radius', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'title_box_shadow_active',
+                'selector' => '{{WRAPPER}} .active-toggle .bodyloom-toggles__title',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'title_text_shadow_active',
+                'selector' => '{{WRAPPER}} .active-toggle .bodyloom-toggles__title-text',
             ]
         );
 
@@ -509,6 +629,13 @@ class Toggles extends Widget_Base
             ]
         );
 
+        $this->start_controls_tabs('trigger_icon_colors_tabs');
+
+        $this->start_controls_tab(
+            'trigger_icon_colors_normal',
+            ['label' => esc_html__('Normal', 'bodyloom-dynamic-toggles')]
+        );
+
         $this->add_control(
             'trigger_icon_color',
             [
@@ -523,12 +650,168 @@ class Toggles extends Widget_Base
         $this->add_control(
             'trigger_icon_bg_color',
             [
-                'label' => esc_html__('Background Color', 'bodyloom-dynamic-toggles'),
+                'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .bodyloom-toggles__trigger' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => ['trigger_icon_view!' => 'default'],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_bd_color',
+            [
+                'label' => esc_html__('Border Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__trigger' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['trigger_icon_view' => 'framed'],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'trigger_icon_colors_hover',
+            ['label' => esc_html__('Hover', 'bodyloom-dynamic-toggles')]
+        );
+
+        $this->add_control(
+            'trigger_icon_color_hover',
+            [
+                'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover .bodyloom-toggles__trigger' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_bg_color_hover',
+            [
+                'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover .bodyloom-toggles__trigger' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['trigger_icon_view!' => 'default'],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_bd_color_hover',
+            [
+                'label' => esc_html__('Border Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover .bodyloom-toggles__trigger' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['trigger_icon_view' => 'framed'],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'trigger_icon_colors_active',
+            ['label' => esc_html__('Active', 'bodyloom-dynamic-toggles')]
+        );
+
+        $this->add_control(
+            'trigger_icon_color_active',
+            [
+                'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__trigger' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_bg_color_active',
+            [
+                'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__trigger' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['trigger_icon_view!' => 'default'],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_bd_color_active',
+            [
+                'label' => esc_html__('Border Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__trigger' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['trigger_icon_view' => 'framed'],
+            ]
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
+        $this->add_responsive_control(
+            'trigger_icon_padding',
+            [
+                'label' => esc_html__('Padding', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__trigger' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => ['trigger_icon_view!' => 'default'],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'trigger_icon_bd_width',
+            [
+                'label' => esc_html__('Border Width', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__trigger' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; border-style: solid;',
+                ],
+                'condition' => ['trigger_icon_view' => 'framed'],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'trigger_icon_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__trigger' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => ['trigger_icon_view!' => 'default'],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'trigger_icon_box_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__trigger',
+                'condition' => ['trigger_icon_view!' => 'default'],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'trigger_icon_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__trigger',
             ]
         );
 
@@ -540,6 +823,33 @@ class Toggles extends Widget_Base
             [
                 'label' => esc_html__('Content', 'bodyloom-dynamic-toggles'),
                 'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'content_alignment',
+            [
+                'label' => esc_html__('Alignment', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Left', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__('Center', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__('Right', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                ],
+                'default' => 'left',
+                'prefix_class' => 'elementor-align-', // Changed from selectors to prefix_class or use selector on content
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__content' => 'text-align: {{VALUE}};',
+                ],
             ]
         );
 
@@ -563,12 +873,68 @@ class Toggles extends Widget_Base
         );
 
         $this->add_control(
+            'content_link_hover',
+            [
+                'label' => esc_html__('Link Hover', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__content a:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'content_background_color',
             [
                 'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles__content' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .bodyloom-toggles__item' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; border-style: solid;',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'toggles_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'toggles_box_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__item',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'content_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__content',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'content_gap',
+            [
+                'label' => esc_html__('Gap', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__content' => 'margin-top: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -590,6 +956,34 @@ class Toggles extends Widget_Base
             [
                 'name' => 'content_border',
                 'label' => esc_html__('Border', 'bodyloom-dynamic-toggles'),
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__content',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'content_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'content_box_shadow',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__content',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'content_shadow',
                 'selector' => '{{WRAPPER}} .bodyloom-toggles__content',
             ]
         );
