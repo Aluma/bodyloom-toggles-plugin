@@ -59,4 +59,4 @@ Search for the "Dynamic Toggles" block and add it to your post or page.
 
 *Rendered Frontend Example*
 
-![Rendered Frontend Example](assets/screenshots/Bodyloom%20Dynanic%20Toggles%20-%20Accordion%20Rendered.jpg)
+![Rendered Frontend Example](assets/screenshots/assets/screenshots/elementor-elements-panel-bodyloom-icon-list-and-toggles-plugins.png)
