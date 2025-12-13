@@ -75,6 +75,7 @@ class Toggles extends Widget_Base
                 ],
                 'frontend_available' => true,
                 'toggle' => false,
+                'render_type' => 'template',
             ]
         );
 
@@ -231,6 +232,7 @@ class Toggles extends Widget_Base
                 'min' => 1,
                 'default' => 0,
                 'description' => esc_html__('Enter the number of the item to be active by default (e.g. 1). Set to 0 to keep all closed.', 'bodyloom-dynamic-toggles'),
+                'render_type' => 'template',
             ]
         );
 
@@ -1017,17 +1019,22 @@ class Toggles extends Widget_Base
             $toggle_title_setting_key = $this->get_repeater_setting_key('toggle_title', 'toggles', $index);
             $toggle_content_setting_key = $this->get_repeater_setting_key('toggle_content', 'toggles', $index);
 
+            $is_active = ($tab_count == $settings['default_toggle']);
+            $active_class = $is_active ? 'active-toggle' : '';
+            $content_style = $is_active ? 'style="display: block;"' : '';
+
             $this->add_render_attribute($toggle_title_setting_key, [
                 'id' => 'elementor-tab-title-' . $id_int . $tab_count,
-                'class' => [$widget_class . '__title'],
+                'class' => [$widget_class . '__title', $active_class],
                 'data-tab' => $tab_count,
                 'role' => 'button',
                 'tabindex' => '0',
+                'aria-expanded' => $is_active ? 'true' : 'false',
             ]);
 
             $this->add_render_attribute($toggle_content_setting_key, [
                 'id' => $widget_class . '__content-' . $id_int . $tab_count,
-                'class' => [$widget_class . '__content'],
+                'class' => [$widget_class . '__content', $active_class],
                 'data-tab' => $tab_count,
             ]);
 
@@ -1071,7 +1078,7 @@ class Toggles extends Widget_Base
             echo '</' . $title_tag . '>';
 
             // Content
-            echo '<div ' . $this->get_render_attribute_string($toggle_content_setting_key) . '>';
+            echo '<div ' . $this->get_render_attribute_string($toggle_content_setting_key) . ' ' . $content_style . '>';
             echo $this->parse_text_editor($item['toggle_content']);
             echo '</div>';
 

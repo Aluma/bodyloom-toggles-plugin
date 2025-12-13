@@ -40,7 +40,10 @@ jQuery(window).on('elementor/frontend/init', function () {
             // Default Active Tab if specified (and no hash overriding)
             if (!location.hash) {
                 var defaultActive = this.getElementSettings('default_toggle');
-                if (defaultActive > 0) {
+                // Check if any tab is already active (rendered by PHP)
+                var $activeTitle = this.elements.$toggleTitles.filter('.' + this.getSettings('classes.active'));
+
+                if (!$activeTitle.length && defaultActive > 0) {
                     this.activateTab(defaultActive);
                 }
             }
