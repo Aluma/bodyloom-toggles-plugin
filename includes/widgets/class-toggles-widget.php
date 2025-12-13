@@ -61,13 +61,20 @@ class Toggles extends Widget_Base
             'type',
             [
                 'label' => esc_html__('Type', 'bodyloom-dynamic-toggles'),
-                'type' => Controls_Manager::SELECT,
+                'type' => Controls_Manager::CHOOSE,
                 'default' => 'toggles',
                 'options' => [
-                    'toggles' => esc_html__('Toggles', 'bodyloom-dynamic-toggles'),
-                    'accordion' => esc_html__('Accordion', 'bodyloom-dynamic-toggles'),
+                    'toggles' => [
+                        'title' => esc_html__('Toggles', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-toggle',
+                    ],
+                    'accordion' => [
+                        'title' => esc_html__('Accordion', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-accordion',
+                    ],
                 ],
                 'frontend_available' => true,
+                'toggle' => false,
             ]
         );
 
@@ -75,12 +82,19 @@ class Toggles extends Widget_Base
             'data_source',
             [
                 'label' => esc_html__('Data Source', 'bodyloom-dynamic-toggles'),
-                'type' => Controls_Manager::SELECT,
+                'type' => Controls_Manager::CHOOSE,
                 'default' => 'static',
                 'options' => [
-                    'static' => esc_html__('Static', 'bodyloom-dynamic-toggles'),
-                    'acf_repeater' => esc_html__('ACF Repeater', 'bodyloom-dynamic-toggles'),
+                    'static' => [
+                        'title' => esc_html__('Static', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-edit',
+                    ],
+                    'acf_repeater' => [
+                        'title' => esc_html__('ACF Repeater', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-database',
+                    ],
                 ],
+                'toggle' => false,
             ]
         );
 
