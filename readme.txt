@@ -43,8 +43,8 @@ Use the "Dynamic Toggles" block.
 
 == Screenshots ==
 
-1. Elementor Elements Panel (assets/screenshots/Elementor Elements Panel - Bodyloom Icon List and Toggles Plugins.png)
-2. Content Panel (assets/screenshots/Edit Bodyloom Toggles Content Panel.png)
-3. Style Panel (assets/screenshots/Edit Bodyloom Toggles Style Panel.png)
-4. Advanced Panel (assets/screenshots/Edit Bodyloom Toggles Advanced Panel.png)
-5. Rendered Frontend Example (assets/screenshots/Bodyloom Dynanic Toggles - Accordion Rendered.jpg)
+1. Elementor Elements Panel (assets/screenshots/elementor-elements-panel-bodyloom-icon-list-and-toggles-plugins.png)
+2. Content Panel (assets/screenshots/edit-bodyloom-toggles-content-panel.png)
+3. Style Panel (assets/screenshots/edit-bodyloom-toggles-style-panel.png)
+4. Advanced Panel (assets/screenshots/edit-bodyloom-toggles-advanced-panel.png)
+5. Rendered Frontend Example (assets/screenshots/bodyloom-dynamic-toggles-accordion-rendered.jpg)

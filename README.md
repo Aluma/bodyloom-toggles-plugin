@@ -43,19 +43,19 @@ Search for the "Dynamic Toggles" block and add it to your post or page.
 
 *Elementor Elements Panel*
 
-![Elementor Elements Panel](assets/screenshots/Elementor%20Elements%20Panel%20-%20Bodyloom%20Icon%20List%20and%20Toggles%20Plugins.png)
+![Elementor Elements Panel](assets/screenshots/elementor-elements-panel-bodyloom-icon-list-and-toggles-plugins.png)
 
 *Content Panel*
 
-![Content Panel](assets/screenshots/Edit%20Bodyloom%20Toggles%20Content%20Panel.png)
+![Content Panel](assets/screenshots/edit-bodyloom-toggles-content-panel.png)
 
 *Style Panel*
 
-![Style Panel](assets/screenshots/Edit%20Bodyloom%20Toggles%20Style%20Panel.png)
+![Style Panel](assets/screenshots/edit-bodyloom-toggles-style-panel.png)
 
 *Advanced Panel*
 
-![Advanced Panel](assets/screenshots/Edit%20Bodyloom%20Toggles%20Advanced%20Panel.png)
+![Advanced Panel](assets/screenshots/edit-bodyloom-toggles-advanced-panel.png)
 
 *Rendered Frontend Example*
 
