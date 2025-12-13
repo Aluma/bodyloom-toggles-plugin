@@ -15,14 +15,14 @@ if (empty($attributes['repeater_field']) || empty($attributes['title_field']) ||
 
 $plugin = \Bodyloom\DynamicToggles\Plugin::get_instance();
 $post_id = get_the_ID();
-$toggles = $plugin->get_dynamic_data($post_id, $attributes['repeater_field'], $attributes['title_field'], $attributes['content_field']);
+$bodyloom_toggles = $plugin->get_dynamic_data($post_id, $attributes['repeater_field'], $attributes['title_field'], $attributes['content_field']);
 
-if (empty($toggles)) {
+if (empty($bodyloom_toggles)) {
     return '<div class="bodyloom-toggles-empty">' . esc_html__('No data found for the specified repeater field.', 'bodyloom-dynamic-toggles') . '</div>';
 }
 
 // Prepare view data
-$view_data = [
+$bodyloom_view_data = [
     'id' => 'block-' . uniqid(),
     'settings' => [
         'type' => $attributes['type'],
@@ -31,7 +31,7 @@ $view_data = [
         'style' => $attributes['style'],
         'default_toggle' => $attributes['open_first'] ? 1 : 0,
     ],
-    'toggles' => $toggles,
+    'toggles' => $bodyloom_toggles,
 ];
 
 // Enqueue assets
