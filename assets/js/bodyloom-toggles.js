@@ -1,89 +1,143 @@
-jQuery(document).ready(function($) {
-    var BodyloomToggles = {
-        init: function() {
-            this.bindEvents();
-            this.enforceState();
+jQuery(window).on('elementor/frontend/init', function () {
+
+    var BodyloomTogglesHandler = elementorModules.frontend.handlers.Base.extend({
+
+        getDefaultSettings: function () {
+            return {
+                selectors: {
+                    toggleTitle: '.bodyloom-toggles__title',
+                    toggleContent: '.bodyloom-toggles__content',
+                    wrapper: '.bodyloom-toggles__list'
+                },
+                classes: {
+                    active: 'active-toggle'
+                },
+                showTabFn: 'slideDown',
+                hideTabFn: 'slideUp'
+            };
+        },
+
+        getDefaultElements: function () {
+            var selectors = this.getSettings('selectors');
+            return {
+                $wrapper: this.$element.find(selectors.wrapper),
+                $toggleTitles: this.$element.find(selectors.toggleTitle),
+                $toggleContents: this.$element.find(selectors.toggleContent)
+            };
+        },
+
+        bindEvents: function () {
+            this.elements.$toggleTitles.on('click', this.onTitleClick.bind(this));
+            this.elements.$toggleTitles.on('keydown', this.onTitleKeyPress.bind(this));
+        },
+
+        onInit: function () {
+            elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
+
+            // Check for Hash
             this.checkHash();
+
+            // Default Active Tab if specified (and no hash overriding)
+            if (!location.hash) {
+                var defaultActive = this.getElementSettings('default_toggle');
+                if (defaultActive > 0) {
+                    this.activateTab(defaultActive);
+                }
+            }
         },
 
-        enforceState: function() {
-            $('.bodyloom-toggles-item').each(function() {
-                var $this = $(this);
-                if ($this.hasClass('active')) {
-                    $this.find('.bodyloom-toggles-content').show();
-                } else {
-                    $this.find('.bodyloom-toggles-content').hide();
+        onTitleClick: function (event) {
+            event.preventDefault();
+            var $clickedTitle = jQuery(event.currentTarget);
+            var tabIndex = $clickedTitle.data('tab');
+            this.changeTab(tabIndex, $clickedTitle);
+        },
+
+        onTitleKeyPress: function (event) {
+            if (event.which === 13 || event.which === 32) { // Enter or Space
+                event.preventDefault();
+                this.elements.$toggleTitles.filter(event.currentTarget).trigger('click');
+            }
+        },
+
+        changeTab: function (tabIndex, $clickedTitle) {
+            var settings = this.getSettings();
+            var isActive = $clickedTitle.hasClass(settings.classes.active);
+            var isAccordion = (this.getElementSettings('type') === 'accordion');
+
+            if (isActive) {
+                // If it's a toggle, or accordion allowing closure (usually standard behavior)
+                // Reference accordion logic might force one open? The reference logic allows closing if toggleSelf is true or not strict accordion.
+                // We will implement standard toggle behavior: click active to close.
+                this.deactivateTab($clickedTitle);
+                return;
+            }
+
+            if (isAccordion) {
+                this.deactivateAllTabs();
+            }
+
+            this.activateTab(tabIndex, $clickedTitle);
+        },
+
+        activateTab: function (tabIndex, $title) {
+            var settings = this.getSettings();
+
+            if (!$title) {
+                $title = this.elements.$toggleTitles.filter('[data-tab="' + tabIndex + '"]');
+            }
+
+            var $content = this.elements.$toggleContents.filter('[data-tab="' + tabIndex + '"]');
+
+            $title.addClass(settings.classes.active).attr('aria-expanded', 'true');
+            $content.addClass(settings.classes.active);
+
+            // If animation needed
+            $content[settings.showTabFn](300);
+        },
+
+        deactivateTab: function ($title) {
+            var settings = this.getSettings();
+            var tabIndex = $title.data('tab');
+            var $content = this.elements.$toggleContents.filter('[data-tab="' + tabIndex + '"]');
+
+            $title.removeClass(settings.classes.active).attr('aria-expanded', 'false');
+            $content.removeClass(settings.classes.active);
+
+            $content[settings.hideTabFn](300);
+        },
+
+        deactivateAllTabs: function () {
+            var self = this;
+            this.elements.$toggleTitles.each(function () {
+                var $title = jQuery(this);
+                if ($title.hasClass(self.getSettings('classes.active'))) {
+                    self.deactivateTab($title);
                 }
             });
         },
 
-        bindEvents: function() {
-            $(document).on('click', '.bodyloom-toggles-title', function(e) {
-                e.preventDefault();
-                var $title = $(this);
-                var $wrapper = $title.closest('.bodyloom-toggles-wrapper');
-                var type = $wrapper.data('type');
-                
-                if ($title.parent().hasClass('active')) {
-                    if (type === 'toggles') {
-                        BodyloomToggles.closeTab($title);
-                    } else {
-                        // Accordion: clicking active tab closes it (optional, usually keeps one open or allows closing)
-                        BodyloomToggles.closeTab($title); 
-                    }
-                } else {
-                    if (type === 'accordion') {
-                        $wrapper.find('.bodyloom-toggles-item.active .bodyloom-toggles-title').each(function() {
-                            BodyloomToggles.closeTab($(this));
-                        });
-                    }
-                    BodyloomToggles.openTab($title);
-                }
-            });
-
-            // Keyboard accessibility
-            $(document).on('keydown', '.bodyloom-toggles-title', function(e) {
-                if (e.which === 13 || e.which === 32) { // Enter or Space
-                    e.preventDefault();
-                    $(this).click();
-                }
-            });
-        },
-
-        openTab: function($title) {
-            var $item = $title.parent();
-            var $content = $item.find('.bodyloom-toggles-content');
-            
-            $item.addClass('active');
-            $content.slideDown(300);
-        },
-
-        closeTab: function($title) {
-            var $item = $title.parent();
-            var $content = $item.find('.bodyloom-toggles-content');
-            
-            $item.removeClass('active');
-            $content.slideUp(300);
-        },
-
-        checkHash: function() {
-            var hash = window.location.hash;
+        checkHash: function () {
+            var hash = location.hash;
+            // Support custom ID (item level) or default anchor behavior
             if (hash) {
-                var $target = $(hash);
-                if ($target.length && $target.hasClass('bodyloom-toggles-item')) {
-                    var $title = $target.find('.bodyloom-toggles-title');
-                    // Scroll to item
-                    $('html, body').animate({
-                        scrollTop: $target.offset().top - 100
+                // Check if hash matches a toggle_custom_id
+                var $targetItem = this.$element.find('[toggle_custom_id="' + hash + '"], [toggle_custom_id="' + hash.replace('#', '') + '"]');
+
+                if ($targetItem.length) {
+                    var $title = $targetItem.find(this.getSettings('selectors.toggleTitle'));
+                    this.activateTab($title.data('tab'), $title);
+
+                    // Scroll
+                    jQuery('html, body').animate({
+                        scrollTop: $targetItem.offset().top - 100
                     }, 500);
-                    // Open item
-                    if (!$target.hasClass('active')) {
-                        $title.click();
-                    }
                 }
             }
         }
-    };
+    });
 
-    BodyloomToggles.init();
+    elementorFrontend.hooks.addAction('frontend/element_ready/bodyloom-toggles.default', function ($scope) {
+        new BodyloomTogglesHandler({ $element: $scope });
+    });
 });

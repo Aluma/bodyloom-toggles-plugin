@@ -94,7 +94,7 @@ class Plugin
         wp_register_script(
             'bodyloom-toggles',
             BODYLOOM_TOGGLES_URL . 'assets/js/bodyloom-toggles.js',
-            ['jquery'],
+            ['jquery', 'elementor-frontend'],
             BODYLOOM_TOGGLES_VERSION,
             true
         );

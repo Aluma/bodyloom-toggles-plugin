@@ -72,20 +72,6 @@ class Toggles extends Widget_Base
         );
 
         $this->add_control(
-            'style',
-            [
-                'label' => esc_html__('Style', 'bodyloom-dynamic-toggles'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'default',
-                'options' => [
-                    'default' => esc_html__('Default (Arrow)', 'bodyloom-dynamic-toggles'),
-                    'plus-minus' => esc_html__('Plus/Minus', 'bodyloom-dynamic-toggles'),
-                    'chevron' => esc_html__('Chevron', 'bodyloom-dynamic-toggles'),
-                ],
-            ]
-        );
-
-        $this->add_control(
             'data_source',
             [
                 'label' => esc_html__('Data Source', 'bodyloom-dynamic-toggles'),
@@ -273,18 +259,6 @@ class Toggles extends Widget_Base
         );
 
         $this->add_responsive_control(
-            'item_padding',
-            [
-                'label' => esc_html__('Padding', 'bodyloom-dynamic-toggles'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
             'item_space_between',
             [
                 'label' => esc_html__('Space Between', 'bodyloom-dynamic-toggles'),
@@ -295,7 +269,8 @@ class Toggles extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-item:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bodyloom-toggles__item' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .bodyloom-toggles__item:last-child' => 'margin-bottom: 0;',
                 ],
             ]
         );
@@ -304,7 +279,7 @@ class Toggles extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'item_border',
-                'selector' => '{{WRAPPER}} .bodyloom-toggles-item',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__item',
                 'separator' => 'before',
             ]
         );
@@ -316,7 +291,7 @@ class Toggles extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bodyloom-toggles__item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -325,7 +300,7 @@ class Toggles extends Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'item_box_shadow',
-                'selector' => '{{WRAPPER}} .bodyloom-toggles-item',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__item',
             ]
         );
 
@@ -344,12 +319,13 @@ class Toggles extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'selector' => '{{WRAPPER}} .bodyloom-toggles-title',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__title',
             ]
         );
 
         $this->start_controls_tabs('title_colors_tabs');
 
+        // Normal
         $this->start_controls_tab(
             'title_colors_normal',
             ['label' => esc_html__('Normal', 'bodyloom-dynamic-toggles')]
@@ -361,7 +337,8 @@ class Toggles extends Widget_Base
                 'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bodyloom-toggles__title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bodyloom-toggles__title-link' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -372,13 +349,45 @@ class Toggles extends Widget_Base
                 'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-title' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .bodyloom-toggles__title' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->end_controls_tab();
 
+        // Hover
+        $this->start_controls_tab(
+            'title_colors_hover',
+            ['label' => esc_html__('Hover', 'bodyloom-dynamic-toggles')]
+        );
+
+        $this->add_control(
+            'title_color_hover',
+            [
+                'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover .bodyloom-toggles__title-link' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'title_bg_color_hover',
+            [
+                'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__title:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        // Active
         $this->start_controls_tab(
             'title_colors_active',
             ['label' => esc_html__('Active', 'bodyloom-dynamic-toggles')]
@@ -390,7 +399,8 @@ class Toggles extends Widget_Base
                 'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-item.active .bodyloom-toggles-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__title-link' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -401,13 +411,12 @@ class Toggles extends Widget_Base
                 'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-item.active .bodyloom-toggles-title' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .active-toggle .bodyloom-toggles__title' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->end_controls_tab();
-
         $this->end_controls_tabs();
 
         $this->add_responsive_control(
@@ -417,9 +426,95 @@ class Toggles extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bodyloom-toggles__title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'separator' => 'before',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'title_border',
+                'label' => esc_html__('Border', 'bodyloom-dynamic-toggles'),
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__title',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Style Section - Trigger
+        $this->start_controls_section(
+            'section_style_trigger',
+            [
+                'label' => esc_html__('Trigger', 'bodyloom-dynamic-toggles'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => ['trigger_icon[value]!' => ''],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_view',
+            [
+                'label' => __('View', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::CHOOSE, // Using CHOOSE as pseudo-buttons for Default/Stacked/Framed
+                'options' => [
+                    'default' => [
+                        'title' => __('Default', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-ban', // No surrounding
+                    ],
+                    'stacked' => [
+                        'title' => __('Stacked', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-circle',
+                    ],
+                    'framed' => [
+                        'title' => __('Framed', 'bodyloom-dynamic-toggles'),
+                        'icon' => 'eicon-square',
+                    ],
+                ],
+                'default' => 'default',
+                'prefix_class' => 'bodyloom-trigger-view-',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'trigger_icon_size',
+            [
+                'label' => __('Size', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 80,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => '--trigger-icon-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_color',
+            [
+                'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__trigger' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'trigger_icon_bg_color',
+            [
+                'label' => esc_html__('Background Color', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__trigger' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['trigger_icon_view!' => 'default'],
             ]
         );
 
@@ -438,7 +533,7 @@ class Toggles extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'content_typography',
-                'selector' => '{{WRAPPER}} .bodyloom-toggles-content',
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__content',
             ]
         );
 
@@ -448,7 +543,18 @@ class Toggles extends Widget_Base
                 'label' => esc_html__('Color', 'bodyloom-dynamic-toggles'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-content' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .bodyloom-toggles__content' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'content_background_color',
+            [
+                'label' => esc_html__('Background', 'bodyloom-dynamic-toggles'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .bodyloom-toggles__content' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -460,8 +566,17 @@ class Toggles extends Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .bodyloom-toggles-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .bodyloom-toggles__content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'content_border',
+                'label' => esc_html__('Border', 'bodyloom-dynamic-toggles'),
+                'selector' => '{{WRAPPER}} .bodyloom-toggles__content',
             ]
         );
 
@@ -483,15 +598,102 @@ class Toggles extends Widget_Base
             return;
         }
 
-        // Prepare data for the view
-        $view_data = [
-            'id' => $this->get_id(),
-            'settings' => $settings,
-            'toggles' => $toggles,
-        ];
+        $id_int = substr($this->get_id_int(), 0, 3);
+        $widget_class = 'bodyloom-toggles';
 
-        // Include the template
-        include BODYLOOM_TOGGLES_PATH . 'templates/toggles-view.php';
+        echo '<div class="' . $widget_class . '__list">';
+
+        foreach ($toggles as $index => $item) {
+            $tab_count = $index + 1;
+
+            $toggle_title_setting_key = $this->get_repeater_setting_key('toggle_title', 'toggles', $index);
+            $toggle_content_setting_key = $this->get_repeater_setting_key('toggle_content', 'toggles', $index);
+
+            $this->add_render_attribute($toggle_title_setting_key, [
+                'id' => 'elementor-tab-title-' . $id_int . $tab_count,
+                'class' => [$widget_class . '__title'],
+                'data-tab' => $tab_count,
+                'role' => 'button',
+                'tabindex' => '0',
+            ]);
+
+            $this->add_render_attribute($toggle_content_setting_key, [
+                'id' => $widget_class . '__content-' . $id_int . $tab_count,
+                'class' => [$widget_class . '__content'],
+                'data-tab' => $tab_count,
+            ]);
+
+            // Only add inline editing for static content
+            if ($settings['data_source'] === 'static') {
+                $this->add_inline_editing_attributes($toggle_content_setting_key, 'advanced');
+            }
+
+            $custom_id = '';
+            if (!empty($item['toggle_custom_id'])) {
+                $custom_id = ' toggle_custom_id="' . esc_attr($item['toggle_custom_id']) . '"';
+            }
+
+            echo '<div class="' . $widget_class . '__item"' . $custom_id . '>';
+
+            // Title
+            $title_tag = Utils::validate_html_tag($settings['title_html_tag']);
+            echo '<' . $title_tag . ' ' . $this->get_render_attribute_string($toggle_title_setting_key) . '>';
+
+            // Link
+            echo '<a class="' . $widget_class . '__title-link" href="#" tabindex="-1">';
+            echo '<span class="' . $widget_class . '__title-text">' . wp_kses_post($item['toggle_title']) . '</span>';
+            echo '</a>';
+
+            // Trigger Icon
+            if (!empty($settings['trigger_icon']['value'])) {
+                echo '<span class="' . $widget_class . '__trigger">';
+
+                echo '<span class="' . $widget_class . '__trigger-closed">';
+                Icons_Manager::render_icon($settings['trigger_icon'], ['aria-hidden' => 'true']);
+                echo '</span>';
+
+                $active_icon = !empty($settings['trigger_active_icon']['value']) ? $settings['trigger_active_icon'] : $settings['trigger_icon'];
+                echo '<span class="' . $widget_class . '__trigger-opened">';
+                Icons_Manager::render_icon($active_icon, ['aria-hidden' => 'true']);
+                echo '</span>';
+
+                echo '</span>';
+            }
+
+            echo '</' . $title_tag . '>';
+
+            // Content
+            echo '<div ' . $this->get_render_attribute_string($toggle_content_setting_key) . '>';
+            echo $this->parse_text_editor($item['toggle_content']);
+            echo '</div>';
+
+            echo '</div>'; // End Item
+        }
+
+        echo '</div>'; // End List
+
+        // FAQ Schema
+        if (isset($settings['faq_schema']) && 'yes' === $settings['faq_schema']) {
+            // Implementation for schema similar to reference...
+            $json = [
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => [],
+            ];
+            foreach ($toggles as $item) {
+                if (empty($item['toggle_title']) || empty($item['toggle_content']))
+                    continue;
+                $json['mainEntity'][] = [
+                    '@type' => 'Question',
+                    'name' => wp_strip_all_tags($item['toggle_title']),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => wp_strip_all_tags($item['toggle_content']),
+                    ],
+                ];
+            }
+            echo '<script type="application/ld+json">' . wp_json_encode($json) . '</script>';
+        }
     }
 
     protected function get_dynamic_toggles($settings)
@@ -505,7 +707,6 @@ class Toggles extends Widget_Base
         }
 
         $post_id = get_the_ID();
-
         $provider = \Bodyloom\DynamicToggles\Provider_Factory::get_provider();
 
         if (!$provider) {
